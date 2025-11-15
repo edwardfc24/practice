@@ -1,0 +1,38 @@
+# version: "3.9" NO requerido hace ya un par de años
+
+services:
+  wordpress-cms: # Contenedor/Servicio
+    image: wordpress:6.8.3 # Imagen con la que se construye el contenedor
+    container_name: server # Valor opcional, toma el nombre del servicio
+    ports:
+      - 80:80 # Pueden exporner más de un puerto
+    environment: # Todas las variables de entorno que necista nuestro contenedor para ejcutarse
+      - WORDPRESS_DB_HOST=database
+      - WORDPRESS_DB_USER=wordpress_db_user
+      - WORDPRESS_DB_PASSWORD=SuperUsuar10
+      - WORDPRESS_DB_NAME=wordpress_db
+      - WORDPRESS_TABLE_PREFIX=wp_
+    volumes: # Puedo definir más de uno
+      - wordpress:/var/www/html
+      - wordpress-themes:/var/www/html/wp-content/themes/
+      - wordpress-plugins:/var/www/html/wp-content/plugins/
+    depends_on: # Indica que contenedores deben levantarse antes de donde se utiliza esta etiqueta
+      - database
+
+  database:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE=wordpress_db
+      - MYSQL_USER=wordpress_db_user
+      - MYSQL_PASSWORD=SuperUsuar10
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - db:/var/lib/mysql
+
+volumes: # Definición de volúmenes para persistencia de datos compartidos
+  wordpress:
+  wordpress-themes:
+  wordpress-plugins:
+  db:

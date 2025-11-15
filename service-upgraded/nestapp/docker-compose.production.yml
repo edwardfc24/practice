@@ -1,0 +1,55 @@
+services:
+  db-server:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE:/run/secrets/db_name
+      - MYSQL_USER:/run/secrets/db_user
+      - MYSQL_PASSWORD:/run/secrets/db_password
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    secrets:
+      - db_name
+      - db_user
+      - db_password
+    volumes:
+      - db:/var/lib/mysql
+  rest-api:
+    image: edwardfc/custom-node:1.0.0
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=db-server
+      - DB_PORT:/run/secrets/db_port
+      - DB_USER:/run/secrets/db_user
+      - DB_PASSWORD:/run/secrets/db_password
+      - DB_NAME:/run/secrets/db_name
+    secrets:
+      - db_port
+      - db_user
+      - db_password
+      - db_name
+    volumes:
+      - code:/src
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+    depends_on: # Es ignorado en producción por buenas prácticas
+      - db-server
+volumes: # Definición de volúmenes para persistencia de datos compartidos
+  code:
+  db:
+secrets:
+  db_name:
+    external: true
+  db_user:
+    external: true
+  db_password:
+    external: true
+  db_port:
+    external: true

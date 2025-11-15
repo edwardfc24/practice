@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# Temporary files
+.env
+.env.*.local
+.DS_Store
+*.seed
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.graphql.schema.json
+*.tsbuildinfo
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Other
+tmp/
+
+.cache/
+.next/
+.out/
