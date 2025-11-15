@@ -64,3 +64,14 @@ volumes:
 ```
 
 Volúmenes que persisten info fuera del ciclo de vida del contenedor.
+
+## Secretos
+
+Para la creación de secretos en línea usé los siguientes comandosÑ
+
+``` bash
+printf "puertoElegido" | docker secret create db_port -
+printf "UsuarioBaseDeDatos" | docker secret create db_user -
+printf "PasswordSeguro" | docker secret create db_password -
+printf "nestapp_db" | docker secret create db_name -
+```

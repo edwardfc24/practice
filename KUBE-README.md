@@ -6,7 +6,7 @@ Creado por Google y ahora mantenido por la CNCF, Kubernetes está diseñado para
 
 ---
 
-### Componentes básicos de Kubernetes
+## Componentes básicos de Kubernetes
 
 | Componente        | Descripción breve                                                                 |
 |-------------------|----------------------------------------------------------------------------------|
@@ -20,7 +20,7 @@ Creado por Google y ahora mantenido por la CNCF, Kubernetes está diseñado para
 
 ---
 
-### Ciclo de vida de una app en Kubernetes
+## Ciclo de vida de una app en Kubernetes
 
 1. Se escribe un manifiesto YAML (por ejemplo, un `Deployment`).
 2. Se aplica con `kubectl apply -f archivo.yml`.
@@ -30,7 +30,7 @@ Creado por Google y ahora mantenido por la CNCF, Kubernetes está diseñado para
 
 ---
 
-### Comandos básicos de Kubernetes (`kubectl`)
+## Comandos básicos de Kubernetes (`kubectl`)
 
 | Comando                                | Descripción                                                   |
 |----------------------------------------|----------------------------------------------------------------|
