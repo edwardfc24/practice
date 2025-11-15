@@ -1,0 +1,32 @@
+services:
+  rest-api:
+    image: custom-node
+    build: . #./test/Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    volumes:
+      - code:/src
+    depends_on:
+      - db-server
+    
+  db-server:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - db:/var/lib/mysql
+
+volumes: # Definición de volúmenes para persistencia de datos compartidos
+  code:
+  db:
